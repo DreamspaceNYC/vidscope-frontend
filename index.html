@@ -38,7 +38,14 @@
         });
         const data = await res.json();
         result.textContent = 
-          ;
+`🤖 AI Detection: ${data.ai_likelihood}
+🎞️ Codec: ${data.codec} | Audio: ${data.audio_codec}
+📦 Bitrate: ${data.bitrate}
+⏱️ Duration: ${data.duration}
+🖼️ Resolution: ${data.resolution}
+🎯 FPS: ${data.fps}
+🛠️ FFmpeg Fingerprint: ${data.ffmpeg_fingerprint}
+🧪 Summary:\n${data.summary}`;
       } catch (err) {
         result.textContent = "❌ Error: " + err.message;
       }
