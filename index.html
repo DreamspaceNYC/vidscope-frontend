@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔍 Vidscope Forensic Analyzer</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9fafb; color: #111; }
+    input, button { padding: 0.5rem; font-size: 1rem; margin-top: 0.5rem; }
+    #result { margin-top: 2rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Vidscope Forensic Analyzer</h1>
+  <p>🎥 Upload MP4 or Paste URL:</p>
+  <input type="file" id="file" />
+  <br/>
+  <input type="text" id="url" placeholder="https://www.youtube.com/shorts/xyz" size="60" />
+  <br/>
+  <button onclick="analyze()">Analyze</button>
+  <pre id="result">Waiting for input...</pre>
+
+  <script>
+    async function analyze() {
+      const file = document.getElementById('file').files[0];
+      const url = document.getElementById('url').value;
+      const result = document.getElementById('result');
+      result.textContent = 'Analyzing...';
+
+      const form = new FormData();
+      if (file) form.append("file", file);
+      if (url) form.append("url", url);
+
+      try {
+        const res = await fetch("https://igbalode-vidscope-analyzer.hf.space/analyze", {
+          method: "POST",
+          body: form
+        });
+        const data = await res.json();
+        result.textContent = 
+          ;
+      } catch (err) {
+        result.textContent = "❌ Error: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
